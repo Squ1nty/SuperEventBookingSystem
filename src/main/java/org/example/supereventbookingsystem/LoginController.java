@@ -4,11 +4,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 
@@ -83,13 +81,10 @@ public class LoginController {
             primaryStage.setMinWidth(800);
             primaryStage.setMinHeight(600);
 
-            // 6. Optional: Maintain previous size or set new
-            primaryStage.setWidth(Math.max(currentWidth, 800));
-            primaryStage.setHeight(Math.max(currentHeight, 600));
-
             // 7. Inject services/data into main controller if needed
             MainController mainController = loader.getController();
             mainController.setUsername(usernameInput.getText());
+
 
         } catch (IOException e) {
             // Handle transition error
