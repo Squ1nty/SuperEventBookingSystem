@@ -16,16 +16,9 @@ import java.util.ArrayList;
 public class SuperTicketingSystem extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(SuperTicketingSystem.class.getResource("loginForm.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Login - SuperTicketingSystem");
-        stage.setScene(scene);
-        stage.setResizable(false);
-
-        LoginController controller = fxmlLoader.getController();
-        controller.setPrimaryStage(stage);
-
-        stage.show();
+        NavigationManager.setPrimaryStage(stage);
+        NavigationManager.navigateTo("login");
+        stage.setTitle("SuperEventBooking");
     }
 
     public static void initEvents(){

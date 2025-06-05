@@ -29,8 +29,8 @@ public class LoginController {
     }
 
     public void handleSubmit(){
-        if (credentialsIsValid()) {
-            loadMainApp();
+        if (credentialsIsValid()){
+            NavigationManager.navigateTo("main");
         }
     }
     private boolean credentialsIsValid(){
@@ -59,37 +59,5 @@ public class LoginController {
         }
         pwdInputResponseLabel.setText("Username and/or password are incorrect");
         return false;
-    }
-    private void loadMainApp(){
-        try {
-            // 1. Load main application FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("mainApp.fxml"));
-            Parent mainAppRoot = loader.load();
-
-            // 2. Get current scene and replace content
-            Scene currentScene = primaryStage.getScene();
-
-            // 3. Preserve current window size/position
-            double currentWidth = currentScene.getWidth();
-            double currentHeight = currentScene.getHeight();
-
-            // 4. Replace root node
-            currentScene.setRoot(mainAppRoot);
-
-            // 5. Adjust window settings
-            primaryStage.setTitle("Main Application");
-            primaryStage.setMinWidth(800);
-            primaryStage.setMinHeight(600);
-
-            // 7. Inject services/data into main controller if needed
-            MainController mainController = loader.getController();
-            mainController.setUsername(usernameInput.getText());
-
-
-        } catch (IOException e) {
-            // Handle transition error
-            System.out.println("Application failed to load: " + e.getMessage());
-            e.printStackTrace();
-        }
     }
 }

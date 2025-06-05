@@ -1,9 +1,17 @@
 package org.example.supereventbookingsystem;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MainController {
+    @FXML
+    private Stage primaryStage;
     @FXML
     private Label userGreetingLabel;
 
@@ -13,6 +21,10 @@ public class MainController {
         this.username = username;
         userGreetingLabel.setText("Welcome " + this.username + "!");
     }
-    public void getAllEventsCaller(){
+    public void loadEventsPage(){
+        NavigationManager.navigateTo("events");
+    }
+    public void loadMakeBookingPage(){
+        NavigationManager.navigateTo("makeBooking");
     }
 }
