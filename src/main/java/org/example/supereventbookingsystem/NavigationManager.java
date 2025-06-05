@@ -35,12 +35,12 @@ public class NavigationManager{
             }
 
             if(pageName.equals("login")){
-                primaryStage.setMinWidth(400);
-                primaryStage.setMinHeight(600);
+                primaryStage.setWidth(400);
+                primaryStage.setHeight(600);
             }
             else {
-                primaryStage.setMinWidth(800);
-                primaryStage.setMinHeight(600);
+                primaryStage.setWidth(997);
+                primaryStage.setHeight(600);
             }
             primaryStage.setResizable(false);
             primaryStage.show();
@@ -52,7 +52,6 @@ public class NavigationManager{
 
     private static String getFxmlPath(String pageName){
         return switch (pageName.toLowerCase()){
-            case "events" -> "/org/example/supereventbookingsystem/eventsList.fxml";
             case "login" -> "/org/example/supereventbookingsystem/loginForm.fxml";
             case "main" -> "/org/example/supereventbookingsystem/mainApp.fxml";
             case "makebooking" -> "/org/example/supereventbookingsystem/makebooking.fxml";
