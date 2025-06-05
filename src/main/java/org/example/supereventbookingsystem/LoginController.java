@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class LoginController {
     @FXML
@@ -30,6 +31,9 @@ public class LoginController {
 
     public void handleSubmit(){
         if (credentialsIsValid()){
+            User user = new User(usernameInput.getText(), new ArrayList<>());
+
+            SessionManager.setCurrentUser(user);
             NavigationManager.navigateTo("main");
         }
     }

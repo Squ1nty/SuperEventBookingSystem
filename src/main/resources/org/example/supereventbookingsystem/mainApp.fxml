@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -27,45 +28,59 @@
             <Insets />
          </VBox.margin>
       </Label>
-      <HBox alignment="CENTER" prefHeight="378.0">
+      <VBox alignment="CENTER" maxWidth="800.0" prefHeight="450.0">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-               <children>
-                  <Button mnemonicParsing="false" text="Button" />
-                  <Button mnemonicParsing="false" text="Button" />
-                  <Button mnemonicParsing="false" text="Button" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </VBox>
-            <TableView fx:id="eventsTable" editable="true" fixedCellSize="0.0" prefHeight="400.0">
+            <TableView fx:id="eventsTable" fixedCellSize="0.0" maxWidth="700.0">
                <columns>
                   <TableColumn fx:id="eventCol" maxWidth="-1.0" minWidth="125.0" prefWidth="-1.0" text="Event" />
                   <TableColumn fx:id="venueCol" maxWidth="-1.0" minWidth="125.0" prefWidth="-1.0" text="Venue Name" />
-                  <TableColumn fx:id="dayCol" maxWidth="-1.0" minWidth="125.0" prefWidth="-1.0" text="Day" />
-                  <TableColumn fx:id="priceCol" maxWidth="-1.0" minWidth="125.0" prefWidth="-1.0" text="Price ($)" />
-                  <TableColumn fx:id="ticketsSoldCol" maxWidth="-1.0" minWidth="125.0" prefWidth="-1.0" text="Tickets Sold" />
-                  <TableColumn fx:id="ticketsLeftCol" maxWidth="-1.0" minWidth="125.0" prefWidth="-1.0" text="Tickets Left" />
-                  <TableColumn fx:id="totalTicketsCol" maxWidth="-1.0" minWidth="125.0" prefWidth="-1.0" text="Total Tickets" />
+                  <TableColumn fx:id="dayCol" maxWidth="-1.0" minWidth="75.0" prefWidth="-1.0" text="Day" />
+                  <TableColumn fx:id="priceCol" maxWidth="-1.0" minWidth="75.0" prefWidth="-1.0" text="Price ($)" />
+                  <TableColumn fx:id="ticketsSoldCol" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Tickets Sold" />
+                  <TableColumn fx:id="ticketsLeftCol" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Tickets Left" />
+                  <TableColumn fx:id="totalTicketsCol" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Total Tickets" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
+            <HBox alignment="CENTER" maxWidth="700.0" spacing="20.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefWidth="100.0">
+                     <children>
+                        <Label text="Event Name:" />
+                        <TextField fx:id="eventNameInput" />
+                        <Label fx:id="eventErrorLabel" textFill="RED" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" prefWidth="100.0">
+                     <children>
+                        <Label text="Day:" />
+                        <TextField fx:id="dayInput" />
+                        <Label fx:id="dayErrorLabel" textFill="RED" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" prefWidth="100.0">
+                     <children>
+                        <Label text="Ticket Quantity:" />
+                        <TextField fx:id="ticketQuantityInput" />
+                        <Label fx:id="ticketErrorLabel" textFill="RED" />
+                     </children>
+                  </VBox>
+                  <HBox fx:id="refreshAndLogoutBox" alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="324.0" spacing="15.0">
+                     <children>
+                        <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#handleBooking" prefWidth="70.0" text="Book" />
+                        <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#loadCheckout" prefWidth="70.0" text="Checkout" />
+                        <Button maxWidth="-Infinity" mnemonicParsing="false" prefWidth="70.0" text="Orders" />
+                        <Button fx:id="logoutBtn" maxWidth="-Infinity" mnemonicParsing="false" onAction="#handleLogout" prefWidth="70.0" text="Log Out" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" top="20.0" />
+               </padding>
+            </HBox>
          </children>
-         <padding>
-            <Insets right="20.0" />
-         </padding>
-      </HBox>
-      <HBox alignment="BOTTOM_RIGHT" prefWidth="800.0" spacing="20.0">
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-         <children>
-            <Button fx:id="refreshBtn" mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
-            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#handleLogout" text="Log Out" />
-         </children>
-      </HBox>
+      </VBox>
    </children>
 </VBox>

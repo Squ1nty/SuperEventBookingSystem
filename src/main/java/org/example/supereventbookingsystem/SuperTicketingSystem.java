@@ -17,7 +17,7 @@ public class SuperTicketingSystem extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         NavigationManager.setPrimaryStage(stage);
-        NavigationManager.navigateTo("main"); //CHANGE THIS BACK TO LOGIN ONCE YOU ARE DONE
+        NavigationManager.navigateTo("login"); //CHANGE THIS BACK TO LOGIN ONCE YOU ARE DONE
         stage.setTitle("SuperEventTicketing");
     }
 

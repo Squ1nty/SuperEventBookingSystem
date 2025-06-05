@@ -2,24 +2,32 @@ package org.example.supereventbookingsystem;
 
 import javafx.beans.property.*;
 
-public class Event {
+public class Event{
 
-    private StringProperty eventName = new SimpleStringProperty();
-    private StringProperty venueName = new SimpleStringProperty();
-    private StringProperty day = new SimpleStringProperty();
-    private IntegerProperty price = new SimpleIntegerProperty();
-    private IntegerProperty ticketsSold = new SimpleIntegerProperty();
-    private IntegerProperty ticketsLeft = new SimpleIntegerProperty();
-    private IntegerProperty totalTickets = new SimpleIntegerProperty();
+    private final StringProperty eventName = new SimpleStringProperty("");
+    private final StringProperty venueName = new SimpleStringProperty("");
+    private final StringProperty day = new SimpleStringProperty("");
+    private final IntegerProperty price = new SimpleIntegerProperty(0);
+    private final IntegerProperty ticketsSold = new SimpleIntegerProperty(0);
+    private final ReadOnlyIntegerWrapper ticketsLeft = new ReadOnlyIntegerWrapper();
+    private final IntegerProperty totalTickets = new SimpleIntegerProperty(0);
 
-    public Event(String eventName, String venueName, String day, int price, int ticketsSold, int totalTickets){
-        setEventName(eventName);
-        setVenueName(venueName);
-        setDay(day);
-        setPrice(price);
-        setTicketsSold(ticketsSold);
-        setTicketsLeft(totalTickets - ticketsSold);
-        setTotalTickets(totalTickets);
+    public Event() {
+        setupTicketsLeftBinding();
+    }
+
+    public Event(String eventName, String venueName, String day, int price, int ticketsSold, int totalTickets) {
+        this.eventName.set(eventName);
+        this.venueName.set(venueName);
+        this.day.set(day);
+        this.price.set(price);
+        this.ticketsSold.set(ticketsSold);
+        this.totalTickets.set(totalTickets);
+        setupTicketsLeftBinding();
+    }
+
+    private void setupTicketsLeftBinding() {
+        ticketsLeft.bind(totalTickets.subtract(ticketsSold));
     }
 
     //Property Getters
@@ -38,8 +46,8 @@ public class Event {
     public IntegerProperty ticketsSoldProperty(){
         return ticketsSold;
     }
-    public IntegerProperty ticketsLeftProperty(){
-        return ticketsLeft;
+    public ReadOnlyIntegerProperty ticketsLeftProperty() {
+        return ticketsLeft.getReadOnlyProperty();
     }
     public IntegerProperty totalTicketsProperty(){
         return totalTickets;
@@ -84,8 +92,8 @@ public class Event {
     public void setTicketsSold(int ticketsSold){
         this.ticketsSold.set(ticketsSold);
     }
-    public void setTicketsLeft(int ticketsLeft){
-        this.ticketsLeft.set(ticketsLeft);
+    public void setTicketsLeft(){
+        ticketsLeft.bind(totalTicketsProperty().subtract(ticketsSoldProperty()));
     }
     public void setTotalTickets(int totalTickets){
         this.totalTickets.set(totalTickets);

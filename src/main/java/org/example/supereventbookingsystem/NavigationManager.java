@@ -23,14 +23,28 @@ public class NavigationManager{
                 throw new IOException("Resource not found: " + fxmlPath);
             }
 
-            Parent root = FXMLLoader.load(resourceUrl);
+
+            FXMLLoader loader = new FXMLLoader(resourceUrl);
+            Parent root = loader.load();
+
+            if (pageName.equals("main")) {
+                MainController controller = loader.getController();
+
+            }
+            // Handle checkout controller initialization
+            if (pageName.equals("checkout")) {
+                CheckoutController controller = loader.getController();
+                User currentUser = SessionManager.getCurrentUser();
+                if (currentUser != null) {
+                    controller.setCartItems(currentUser.getAllBookedEvents());
+                }
+            }
 
             Scene scene = primaryStage.getScene();
-            if(scene == null){
+            if (scene == null) {
                 scene = new Scene(root);
                 primaryStage.setScene(scene);
-            }
-            else{
+            } else {
                 scene.setRoot(root);
             }
 
@@ -54,7 +68,7 @@ public class NavigationManager{
         return switch (pageName.toLowerCase()){
             case "login" -> "/org/example/supereventbookingsystem/loginForm.fxml";
             case "main" -> "/org/example/supereventbookingsystem/mainApp.fxml";
-            case "makebooking" -> "/org/example/supereventbookingsystem/makebooking.fxml";
+            case "checkout" -> "/org/example/supereventbookingsystem/checkout.fxml";
             default -> throw new IllegalArgumentException("Unknown page: " + pageName);
         };
     }
